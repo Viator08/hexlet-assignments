@@ -5,16 +5,16 @@ import java.util.HashMap;
 
 // BEGIN
 public class InMemoryKV implements KeyValueStorage {
-    private Map<String, String> data;
+    private Map<String, String> data = new HashMap<String, String>();
 
 
     public InMemoryKV(Map<String, String> data) {
-        this.data = data;
+        this.data.putAll(data);
     }
 
     @Override
     public Map<String, String> toMap() {
-        return data;
+        return new HashMap<>(data);
     }
 
     @Override
