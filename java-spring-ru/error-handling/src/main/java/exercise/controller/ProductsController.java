@@ -52,7 +52,6 @@ public class ProductsController {
         productFound.setPrice(product.getPrice());
         return productRepository.save(productFound);
     }
-    // END
 
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable long id) {
