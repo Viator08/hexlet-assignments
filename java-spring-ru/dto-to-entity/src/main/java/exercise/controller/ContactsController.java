@@ -1,12 +1,12 @@
 package exercise.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import exercise.model.Contact;
 import exercise.repository.ContactRepository;
@@ -22,8 +22,7 @@ public class ContactsController {
 
     // BEGIN
     @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ContactDTO createContact(@RequestBody ContactCreateDTO contactCreateDTO) {
+    public ResponseEntity<ContactDTO> createContact(@RequestBody ContactCreateDTO contactCreateDTO) {
         Contact contact = new Contact();
         contact.setPhone(contactCreateDTO.getPhone());
         contact.setFirstName(contactCreateDTO.getFirstName());
@@ -38,7 +37,7 @@ public class ContactsController {
         contactDTO.setLastName(contactSaved.getLastName());
         contactDTO.setCreatedAt(contactSaved.getCreatedAt());
         contactDTO.setUpdatedAt(contactSaved.getUpdatedAt());
-        return contactDTO;
+        return ResponseEntity.status(HttpStatus.CREATED).body(contactDTO);
     }
     // END
 }
